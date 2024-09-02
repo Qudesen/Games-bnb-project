@@ -1,2 +1,13 @@
 <h1>Games#new</h1>
 <p>Find me in app/views/games/new.html.erb</p>
+
+
+<h1>Create rental</h1>
+
+<%= simle_form_for @game do |f| %>
+ <%= f.input :name, placeholder: 'Name'%>
+ <%= f.input :description, placeholder: 'Description'%>
+ <%= f.input :price_per_day, placeholder: 'Price'%>
+ <%= f.input :address, placeholder: 'Address'%>
+ <%= f.submit class: 'btn btn-primary' %>
+<% end %>
