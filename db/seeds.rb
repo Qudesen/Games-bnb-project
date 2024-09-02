@@ -7,3 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require "faker"
+
+# Create 20 rentals
+20.times do
+  Rental.create(
+    price: Faker::Number.decimal(l_digits: 2),
+    start_date: Faker::Date.between(from: 2.days.ago, to: Date.today),
+    end_date: Faker::Date.between(from: Date.today, to: 2.days.from_now),
+    user_id: Faker::Number.within(range: 1..10),
+    game_id: Faker::Number.within(range: 1..10),
+    status: ["pending", "accepted", "rejected"].sample
+  )
+end
