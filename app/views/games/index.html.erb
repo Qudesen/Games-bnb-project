@@ -1,2 +1,45 @@
-<h1>Games#index</h1>
-<p>Find me in app/views/games/index.html.erb</p>
+<div class="container">
+
+  <div class="head-container">
+    <div class="row">
+      <div class="col-10 hello-user ">
+        <h1>Bonjour <%= current_user ? current_user.username : "" %>, tu cherches un jeu?</h1>
+      </div>
+      <div class="col-2 head-buttons text-center">
+        <div class="btn btn-primary m-1">MENU</div>
+        <%= link_to '+', new_game_path, class: "btn btn-primary m-1" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters-container mt-2">
+    <div class="row">
+      <div class="col">
+        <p>Filter 1: Localisation</p>
+      </div>
+      <div class="col">
+        <p>Filter 2: Choix du jeu</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+  class="games-container mt-2">
+    <% @games.each do |game| %>
+      <div class="game-card" data-controller="show-games-details">
+        <h3><%= game.name%></h3>
+        <p><i>publié par</i> <%= game.user_id%></p>
+        <h3><%= game.address%></h3>
+        <button class="show-button btn btn-primary"
+        data-action="click->show-games-details#display"
+        >MORE</button>
+        <div class="d-none" data-show-games-details-target="description">
+          <p><%= game.description %></p>
+          <button class="rent-button btn btn-primary">
+          RENT THIS GAME</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
