@@ -12,16 +12,25 @@ require "faker"
 
 puts "Processing seeds..."
 
+# Create 10 users
+10.times do
+  User.create(
+    email: Faker::Internet.email,
+    username: Faker::Internet.username,
+    phone_number: Faker::PhoneNumber.phone_number,
+    password: "123456")
+end
+
 # Create 20 rentals
 20.times do
-  Rental.create({
+  Rental.create(
     price: Faker::Number.decimal(l_digits: 2),
     start_date: Faker::Date.between(from: 2.days.ago, to: Date.today),
     end_date: Faker::Date.between(from: Date.today, to: 2.days.from_now),
     user_id: Faker::Number.within(range: 1..10),
     game_id: Faker::Number.within(range: 1..10),
-    status: ["pending", "accepted", "rejected"].sample
-})
+    status: ["pending", "accepted", "rejected"].sample,
+)
 end
 
 puts "Seeds processed!"
