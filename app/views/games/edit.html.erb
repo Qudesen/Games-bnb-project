@@ -1,2 +1,24 @@
-<h1>Games#edit</h1>
-<p>Find me in app/views/games/edit.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+    <%= simple_form_for @game do |f| %>
+    <%= f.input :name,
+                placeholder: "My game",
+                label: "Game" %>
+    <%= f.input :description,
+                placeholder: "My game description..",
+                label: "Description" %>
+    <%= f.input :price_per_day,
+                placeholder: "5",
+                label: "Price per day" %>
+    <%= f.input :address,
+                placeholder: "1 rue de la liberté",
+                label: "Address" %>
+    <div class="text-center">
+      <%= f.button :submit, "SAVE", class: "btn btn-primary" %>
+      <%= link_to "CANCEL", games_path, class: "btn btn-danger text-white" %>
+    </div>
+    <% end %>
+    </div>
+  </div>
+</div>
