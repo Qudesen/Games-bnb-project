@@ -1,2 +1,19 @@
-<h1>Games#new</h1>
-<p>Find me in app/views/games/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <%= simple_form_for @game do |f| %>
+    <%= f.input :name, 
+                placeholder: "My game",
+                label: "Game" %>
+    <%= f.input :description,
+                placeholder: "My game description..",
+                label: "Description" %>
+    <%= f.input :price_per_day,
+                placeholder: "5",
+                label: "Price per day" %>
+    <%= f.input :address,
+                placeholder: "1 rue de la liberté",
+                label: "Address" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
