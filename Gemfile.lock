@@ -318,7 +318,7 @@ DEPENDENCIES
   dotenv-rails
   error_highlight (>= 0.4.0)
   faker
-  ffi (~> 1.16.3)
+  ffi (~> 1.16.0)
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
