@@ -38,6 +38,9 @@
 
         <div class="d-none" data-show-games-details-target="description">
           <p><%= game.description %></p>
+          <button class="rent-button btn btn-primary">
+          RENT THIS GAME</button>
+          <%= link_to "EDIT", edit_game_path(game), class: "btn btn-primary" %>
           <div data-controller="price-calculator"
           data-price-calculator-price-value=<%=game.price_per_day%>>
             <%= render "rental_form", game: game %>
