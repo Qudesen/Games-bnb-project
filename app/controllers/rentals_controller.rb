@@ -1,4 +1,6 @@
 class RentalsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @rentals = current_user.rentals
     @rentals.each do |rental|
@@ -17,6 +19,7 @@ class RentalsController < ApplicationController
 
   def show
     @rental = Rental.find(params[:id])
+    # raise
   end
 
   def create
@@ -50,6 +53,15 @@ class RentalsController < ApplicationController
     @rental = Rental.find(params[:id])
     @rental.destroy
     redirect_to rentals_path, status: :see_other
+  end
+
+  def cancel
+    @rental = Rental.find(params[:id])
+    if @rental.update(status: "Annulée")
+      redirect_to rentals_path, notice: "La location a été annulée avec succès."
+    else
+      redirect_to rentals_path, alert: "Impossible d'annuler la location."
+    end
   end
 
   private

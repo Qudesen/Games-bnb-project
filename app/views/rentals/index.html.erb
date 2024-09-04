@@ -6,6 +6,7 @@
     </div>
     <div class="rentals-container mt-4">
       <% current_user.rentals.sort_by { |hsh| hsh[:status] }.each do |rental| %>
+      <%= link_to rental_path(rental) do %>
         <div class="rental-card">
           <h3><%= rental.game.name %></h3>
           <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
@@ -19,16 +20,25 @@
           </p>
           <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
           <div class="rental-card-side-elements">
-            <p><%= rental.status %></p>
-            <p><%= link_to 'Annuler', edit_rental_path(rental), class: "btn btn-danger text-white",
-              data: {turbo_method: :delete, turbo_confirm: 'Etes-vous sûr.e?'} %></p>
+            <p class="status <%= rental.status %>"><%= rental.status %></p>
+            <% if rental.status == "Confirmé" %>
+              <%= link_to "Annuler", cancel_rental_path(rental), 
+                  class: "btn btn-danger text-white",
+                  data: {
+                    turbo_method: :patch, 
+                    turbo_confirm: "Êtes-vous sûr.e ?"
+                  } 
+              %>
+            <% end %>
           </div>
         </div>
+      <% end %>
       <% end %>
     <% else %>
       <div class="head-container">
         <h4>Veuillez vous connecter pour accéder à vos locations</h4>
         </div>
     <% end %>
+    <%= link_to "< Tous les jeux", games_path %>
     </div>
 </div>
