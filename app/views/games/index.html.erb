@@ -41,7 +41,9 @@
           <p><%= game.description %></p>
           <div class="dates-picker" data-controller="price-calculator"
           data-price-calculator-price-value=<%=game.price_per_day%>>
+          <% if current_user != game.user %>
             <%= render "shared/rental_form", game: game %>
+          <% end %>
             <% @price_per_day = game.price_per_day %>
           <p class="p-1 ml-2" data-price-calculator-target="price"></p>
           <% if current_user == game.user %>
