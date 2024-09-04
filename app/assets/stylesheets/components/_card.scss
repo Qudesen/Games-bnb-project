@@ -5,8 +5,9 @@
   border-radius: 5px;
   position: relative;
 
-  .game-card-side-button {
+  .game-card-side-elements {
     position: absolute;
+    text-align: center;
     right: 15px;
     top: 50%;
     -ms-transform: translateY(-50%);
@@ -22,8 +23,9 @@
   position: relative;
   color: black;
 
-  .rental-status {
+  .rental-card-side-elements {
     position: absolute;
+    text-align: center;
     right: 15px;
     top: 50%;
     -ms-transform: translateY(-50%);
