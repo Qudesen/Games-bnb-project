@@ -8,7 +8,6 @@ class RentalsController < ApplicationController
 
   def show
     @rental = Rental.find(params[:id])
-    # raise
   end
 
   def create
