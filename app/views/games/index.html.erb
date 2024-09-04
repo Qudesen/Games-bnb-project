@@ -27,7 +27,7 @@
     <% @games.each do |game| %>
       <div class="game-card" data-controller="show-games-details">
         <h3><%= game.name%></h3>
-        <p><i>publié par</i> <%= game.user_id%></p>
+        <p><i>publié par</i> <%= game.user.username%></p>
         <h3><%= game.address%></h3>
         <div class="game-card-side-buttons">
           <h3><%= game.price_per_day %> €</h3>
