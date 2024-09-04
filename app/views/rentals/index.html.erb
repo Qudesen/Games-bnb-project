@@ -5,7 +5,7 @@
       <h4><%= current_user.username %></h4>
     </div>
     <div class="rentals-container mt-4">
-      <% current_user.rentals.each do |rental| %>
+      <% current_user.rentals.sort_by { |hsh| hsh[:status] }.each do |rental| %>
       <%= link_to rental_path(rental) do %>
         <div class="rental-card">
           <h3><%= rental.game.name %></h3>

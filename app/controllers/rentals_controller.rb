@@ -1,9 +1,20 @@
 class RentalsController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
     @rentals = current_user.rentals
+    @rentals.each do |rental|
+      if rental.status == "Annulée"
+        break
+      elsif rental.end_date < Date.current
+        rental.status = "Terminée"
+      elsif (rental.end_date >= Date.current) && (rental.start_date <= Date.current)
+        rental.status = "En cours"
+      else
+        rental.status = "Confirmée"
+      end
+      rental.save!
+    end
   end
 
   def show
@@ -17,7 +28,7 @@ class RentalsController < ApplicationController
     @rental.price = (game.price_per_day * (@rental.end_date - @rental.start_date).to_i)
     @rental.user = current_user
     @rental.game = game
-    @rental.status = "Confirmé"
+    @rental.status = "Confirmée"
     if @rental.save!
       redirect_to rental_path(@rental)
     else
