@@ -2,7 +2,6 @@ class RentalsController < ApplicationController
 
   def index
     @rentals = current_user.rentals
-    # line updated
   end
 
   def show
@@ -11,6 +10,10 @@ class RentalsController < ApplicationController
 
   def create
     @rental = Rental.new(rental_params)
+    game = Game.find(params[:game_id])
+    @rental.price = (game.price_per_day.round * (@rental.end_date - @rental.start_date))
+    @rental.user = current_user
+    @rental.game = game
     if @rental.save!
       redirect_to rental_path(@rental)
     else

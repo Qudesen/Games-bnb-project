@@ -1,8 +1,10 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show,]
 
   def index
     @games = Game.all
+    @rental = Rental.new
   end
 
   def show
@@ -15,8 +17,10 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-    if @game.save!
-      redirect_to game_path(@game)
+    user = User.find(current_user.id)
+    @game.user_id = user.id
+    if @game.save
+      redirect_to games_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -45,6 +49,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :description, :price_per_day, :address)
+    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id)
   end
 end
