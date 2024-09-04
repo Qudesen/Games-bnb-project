@@ -11,7 +11,7 @@ class RentalsController < ApplicationController
   def create
     @rental = Rental.new(rental_params)
     game = Game.find(params[:game_id])
-    @rental.price = (game.price_per_day.round * (@rental.end_date - @rental.start_date))
+    @rental.price = (game.price_per_day * (@rental.end_date - @rental.start_date).to_i)
     @rental.user = current_user
     @rental.game = game
     if @rental.save!
