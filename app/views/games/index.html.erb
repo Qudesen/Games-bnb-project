@@ -5,8 +5,7 @@
       <div class="col-10 hello-user ">
         <h1>Bonjour <%=current_user ? current_user.username : ""%>, tu cherches un jeu?</h1>
       </div>
-      <div class="col-2 head-buttons text-center">
-        <div class="btn btn-primary m-1">MENU</div>
+      <div class="col-2 text-center">
         <%= link_to '+', new_game_path, class: "btn btn-primary m-1" %>
       </div>
     </div>
@@ -23,33 +22,30 @@
     </div>
   </div>
 
-  <div class="games-container mt-2">
+  <div class="games-container mt-4">
     <% @games.each do |game| %>
       <div class="game-card" data-controller="show-games-details">
         <h3><%= game.name%></h3>
-        <p><i>publié par</i> <%= game.user.username%></p>
-        <h3><%= game.address%></h3>
-        <div class="game-card-side-buttons">
-          <h3><%= game.price_per_day %> €</h3>
+        <h6><i>publié par</i> <%= game.user.username%></h6>
+        <h6><%= game.address%></h6>
+        <div class="game-card-side-elements">
+          <h3><%= game.price_per_day %> € / j</h3>
           <button class="btn btn-primary"
           data-action="click->show-games-details#display"
-          >MORE</button>
+          >Voir +</button>
         </div>
 
-        <div class="d-none" data-show-games-details-target="description">
+        <div class="desc-and-rental-form d-none" data-show-games-details-target="description">
           <p><%= game.description %></p>
-          <button class="rent-button btn btn-primary">
-          RENT THIS GAME</button>
-          <%= link_to "EDIT", edit_game_path(game), class: "btn btn-primary" %>
-          <div data-controller="price-calculator"
+          <div class="dates-picker" data-controller="price-calculator"
           data-price-calculator-price-value=<%=game.price_per_day%>>
-            <%= render "rental_form", game: game %>
+            <%= render "shared/rental_form", game: game %>
             <% @price_per_day = game.price_per_day %>
-            <p data-price-calculator-target="price"></p>
+          <p class="p-1 ml-2" data-price-calculator-target="price"></p>
+          <%= link_to "Modifier mon annonce", edit_game_path(game), class: "btn btn-warning text-white" %>
+
           </div>
         </div>
       </div>
     <% end %>
   </div>
-
-</div>

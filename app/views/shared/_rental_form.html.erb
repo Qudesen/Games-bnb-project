@@ -1,17 +1,19 @@
-<div class="container col-md-4 col-xxl-2">
+<div class="container">
   <div class="row">
     <%= simple_form_for @rental, url: rentals_path(game_id: game.id), method: :post do |f| %>
 
     <%= f.input :start_date,
           as: :string,
+          label: "Date de début",
           input_html: { data: { controller: "datepicker",
                                 price_calculator_target: "startDate" } } %>
     <%= f.input :end_date,
           as: :string,
+          label: "Date de fin",
           input_html: { data: { controller: "datepicker",
                                 price_calculator_target: "endDate",
                                 action: "change->price-calculator#calculate" } } %>
-    <%= f.submit %>
+    <%= f.submit 'Réserver le jeu', class: "btn btn-default btn-primary"%>
     <% end %>
   </div>
 </div>
