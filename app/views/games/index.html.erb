@@ -25,9 +25,11 @@
   <div class="games-container mt-4">
     <% @games.each do |game| %>
       <div class="game-card" data-controller="show-games-details">
-        <h3><%= game.name%></h3>
-        <h6><i>publié par</i> <%= game.user.username%></h6>
-        <h6><%= game.address%></h6>
+        <div>
+          <h3><%= game.name%></h3>
+          <h6><i>publié par</i> <%= game.user.username%></h6>
+          <h6><%= game.address%></h6>
+        </div>
         <div class="game-card-side-elements">
           <h3><%= game.price_per_day %> € / j</h3>
           <button class="btn btn-primary"
