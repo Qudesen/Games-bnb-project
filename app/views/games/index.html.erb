@@ -42,7 +42,15 @@
             <%= render "shared/rental_form", game: game %>
             <% @price_per_day = game.price_per_day %>
           <p class="p-1 ml-2" data-price-calculator-target="price"></p>
-          <%= link_to "Modifier mon annonce", edit_game_path(game), class: "btn btn-warning text-white" %>
+          <% if current_user == game.user %>
+            <%= link_to "Modifier mon annonce", edit_game_path(game), class: "btn btn-warning text-white" %>
+            <%= link_to "Supprimer mon annonce", game_path(game), 
+                        data: {
+                          turbo_method: :delete,
+                          turbo_confirm: 'Etes-vous sûr.e?'}, 
+                        class: "btn btn-danger text-white"
+            %>
+          <% end %>
 
           </div>
         </div>

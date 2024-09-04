@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show,]
-
+  before_action :authorized_user!, only: [:edit, :update, :destroy]
   def index
     @games = Game.all
     @rental = Rental.new
@@ -50,5 +50,10 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id)
+  end
+  def authorized_user!
+    unless @game.user == current_user
+      redirect_to games_path
+    end
   end
 end

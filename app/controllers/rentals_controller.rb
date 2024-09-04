@@ -14,7 +14,7 @@ class RentalsController < ApplicationController
     @rental.price = (game.price_per_day * (@rental.end_date - @rental.start_date).to_i)
     @rental.user = current_user
     @rental.game = game
-    @rental.status = "Confirmé"
+    @rental.status = "En attente"
     if @rental.save!
       redirect_to rental_path(@rental)
     else
@@ -39,6 +39,15 @@ class RentalsController < ApplicationController
     @rental = Rental.find(params[:id])
     @rental.destroy
     redirect_to rentals_path, status: :see_other
+  end
+
+  def cancel
+    @rental = Rental.find(params[:id])
+    if @rental.update(status: "Annulée")
+      redirect_to rentals_path, notice: "La location a été annulée avec succès."
+    else
+      redirect_to rentals_path, alert: "Impossible d'annuler la location."
+    end
   end
 
   private
