@@ -1,11 +1,14 @@
 class RentalsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @rentals = current_user.rentals
   end
 
   def show
     @rental = Rental.find(params[:id])
+    # raise
   end
 
   def create
