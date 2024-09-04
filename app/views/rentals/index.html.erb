@@ -6,6 +6,7 @@
     </div>
     <div class="rentals-container mt-4">
       <% current_user.rentals.each do |rental| %>
+      <%= link_to rental_path(rental) do %>
         <div class="rental-card">
           <h3><%= rental.game.name %></h3>
           <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
@@ -25,10 +26,12 @@
           </div>
         </div>
       <% end %>
+      <% end %>
     <% else %>
       <div class="head-container">
         <h4>Veuillez vous connecter pour accéder à vos locations</h4>
         </div>
     <% end %>
+    <%= link_to "< Tous les jeux", games_path %>
     </div>
 </div>
