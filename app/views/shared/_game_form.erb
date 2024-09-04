@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-6">
+    <div class="col-lg-6  bg-white p-5 m-5 shadow">
+    <h1 class="d-flex justify-content-center">Créez ton annonce ! 😎</h1>
     <%= simple_form_for @game do |f| %>
     <%= f.input :name, 
                 placeholder: "Nom du jeu",
@@ -14,11 +15,12 @@
     <%= f.input :address,
                 placeholder: "1 rue de la liberté",
                 label: "Adresse" %>
-    <div class="text-center">
-      <%= f.button :submit,"CREER LE JEU", class: "btn btn-primary" %>
+    <div class="text-center pt-3">
+      <%= f.button :submit,"CREER LE JEU", class: "btn btn-primary " %>
       <%= link_to "ANNULER", games_path, class: "btn btn-danger text-white" %>
     </div>
     <% end %>
     </div>
   </div>
+  <%= link_to "< Liste", games_path %>
 </div>
