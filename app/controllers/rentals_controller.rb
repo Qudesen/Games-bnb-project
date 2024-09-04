@@ -17,6 +17,7 @@ class RentalsController < ApplicationController
     @rental.price = (game.price_per_day * (@rental.end_date - @rental.start_date).to_i)
     @rental.user = current_user
     @rental.game = game
+    @rental.status = "Confirmé"
     if @rental.save!
       redirect_to rental_path(@rental)
     else

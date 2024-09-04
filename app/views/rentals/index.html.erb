@@ -4,29 +4,34 @@
       <h1>Mes locations</h1>
       <h4><%= current_user.username %></h4>
     </div>
-    <% current_user.rentals.each do |rental| %>
+    <div class="rentals-container mt-4">
+      <% current_user.rentals.each do |rental| %>
       <%= link_to rental_path(rental) do %>
-      <div class="rental-card">
-        <h3><%= rental.game.name %></h3>
-        <p>propriétaire : <%= rental.game.user.username %></p>
-        <p>
-        <% if (rental.end_date - rental.start_date).to_i == 1 %>
-          1 jour
-        <% else %>
-          <%= (rental.end_date - rental.start_date).to_i %> jours
-        <% end %>
-        , du <%= rental.start_date %> au <%= rental.end_date %>
-        </p>
-        <p><%= "%.2f" % rental.price %> €</p>
-        <div class="rental-status"><%= rental.status %></div>
-      </div>
+        <div class="rental-card">
+          <h3><%= rental.game.name %></h3>
+          <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
+          <p>
+            <% if (rental.end_date - rental.start_date).to_i == 1 %>
+              1 jour,
+            <% else %>
+              <%= (rental.end_date - rental.start_date).to_i %> jours,
+            <% end %>
+             du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
+          </p>
+          <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
+          <div class="rental-card-side-elements">
+            <p><%= rental.status %></p>
+            <p><%= link_to 'Annuler', edit_rental_path(rental), class: "btn btn-danger text-white",
+              data: {turbo_method: :delete, turbo_confirm: 'Etes-vous sûr.e?'} %></p>
+          </div>
+        </div>
       <% end %>
+      <% end %>
+    <% else %>
+      <div class="head-container">
+        <h4>Veuillez vous connecter pour accéder à vos locations</h4>
+        </div>
     <% end %>
-    
-  <% else %>
-    <div class="head-container">
-      <h4>Veuillez vous connecter pour accéder à vos locations</h4>
-      </div>
-  <% end %>
-  <%= link_to "< Tous les jeux", games_path %>
+    <%= link_to "< Tous les jeux", games_path %>
+    </div>
 </div>
