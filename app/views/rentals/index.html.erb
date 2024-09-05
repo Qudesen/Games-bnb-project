@@ -21,7 +21,7 @@
           <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
           <div class="rental-card-side-elements">
             <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
-            <% if rental.status == 1 %>
+            <% if rental.status == "confirmed" %>
               <%= link_to "Annuler", cancel_rental_path(rental),
                   class: "btn btn-danger text-white",
                   data: {

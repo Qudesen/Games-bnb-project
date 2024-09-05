@@ -28,7 +28,7 @@ class RentalsController < ApplicationController
     @rental.price == game.price_per_day if @rental.price == 0
     @rental.user = current_user
     @rental.game = game
-    @rental.status = "Confirmée"
+    @rental.status = "confirmed"
     if @rental.save!
       redirect_to rental_path(@rental)
     else
