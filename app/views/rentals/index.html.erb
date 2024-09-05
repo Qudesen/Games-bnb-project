@@ -7,7 +7,7 @@
     </div>
 
     <div class="rentals-container mt-4">
-      <% current_user.rentals.sort_by { |hsh| hsh[:statuses] }.reverse.each do |rental| %>
+      <% @rentals.each do |rental| %>
 
 
         <div class="rental-card">
@@ -38,7 +38,7 @@
 </div>
           <div class="col-3 rental-card-side-elements">
             <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
-            <% if rental.status == "confirmed" %>
+            <% if rental.confirmed? %>
               <%= link_to "Annuler", cancel_rental_path(rental),
                   class: "btn btn-danger text-white",
                   data: {

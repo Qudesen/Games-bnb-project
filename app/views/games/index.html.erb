@@ -37,7 +37,13 @@
           <div class="col-6 game-card-main-content">
             <h3><%= game.name%></h3>
             <h6><i>publié par</i> <%= game.user.username%></h6>
-            <h6><%= game.address%></h6>
+            <h6><% if game.quarter && game.city %>
+              <%= game.quarter %>, <%= game.city %>
+            <% elsif game.quarter.nil? && game.city %>
+              <%= game.city %>
+            <% else %>
+              <%= game.address %>
+            <%end %></h6>
           </div>
 
           <div class="col-3 game-card-side-elements">
