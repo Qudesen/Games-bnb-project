@@ -14,21 +14,24 @@
   <div class="filters-container mt-2">
     <div class="row">
       <div class="col">
-        <p>Filter 1: Localisation</p>
-      </div>
-      <div class="col">
-        <p>Filter 2: Choix du jeu</p>
+        <%= form_with url: games_path, method: :get, local: true, class: "d-flex col-12" do |form| %>
+          <%= form.text_field :search, class: "form-control mx-1", placeholder: "Jeu, description, adresse" %>
+          <%= form.submit "Chercher", class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
 
   <div class="games-container mt-4">
     <% @games.each do |game| %>
-
-      <div class="game-card" data-controller="show-games-details">
+      <div class="game-card shadow bg-white mb-3 p-3 rounded-4" data-controller="show-games-details">
         <div class="row">
           <div class="col-3 game-card-photo">
-            <p>photo placeholder</p>
+            <% if game.picture.key %>
+              <%= cl_image_tag(game.picture.key, class: "game-img") %>
+            <% else %>
+              <%= cl_image_tag("hag4d9d9rrlqn9q54ujld77h0dlc", class: "game-img") %>
+            <% end %>
           </div>
 
           <div class="col-6 game-card-main-content">
@@ -50,9 +53,8 @@
             >Voir +</button>
           </div>
         </div>
-
-        <div class="row">
-          <div class="desc-and-rental-form d-none" data-show-games-details-target="description">
+        <div class="row justify-content-center">
+          <div class="desc-and-rental-form d-none pt-3 col-6" data-show-games-details-target="description">
             <p><%= game.description %></p>
             <div class="dates-picker" data-controller="price-calculator"
             data-price-calculator-price-value=<%=game.price_per_day%>>
@@ -70,6 +72,7 @@
                             class: "btn btn-danger text-white"%>
             <% end %>
           </div>
+          
         </div>
       </div>
     </div>

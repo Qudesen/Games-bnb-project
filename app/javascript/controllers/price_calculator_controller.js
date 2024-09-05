@@ -6,9 +6,6 @@ export default class extends Controller {
   static values = { price: Number }
 
   calculate() {
-    console.log(this.priceTarget)
-    console.log(this.startDateTarget)
-    console.log(this.endDateTarget)
     const start = this.startDateTarget.value
     const end = this.endDateTarget.value
     const startDate = new Date(start)

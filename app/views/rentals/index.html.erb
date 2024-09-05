@@ -9,13 +9,14 @@
     <div class="rentals-container mt-4">
       <% @rentals.each do |rental| %>
 
+
         <div class="rental-card">
          <div class="row">
-<div class="col-9">
-<%= link_to rental_path(rental) do %>
-<div class="row">
+          <div class="col-9">
+            <%= link_to rental_path(rental) do %>
+            <div class="row">
           <div class="col-3 rental-card-photo">
-            <p>Photo placeholder</p>
+            <%= cl_image_tag("u1c6qobxmkw5e2i9lavt") %>
           </div>
 
           <div class="col-9 rental-card-main-info">
@@ -30,6 +31,7 @@
               du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
             </p>
             <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
+
           </div>
 </div>
 <% end %>
@@ -49,7 +51,6 @@
       </div>
    <% end %>
     </div>
-
     <% else %>
       <div class="head-container">
         <h4>Veuillez vous connecter pour accéder à vos locations</h4>

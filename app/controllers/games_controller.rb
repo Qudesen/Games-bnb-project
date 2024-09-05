@@ -4,12 +4,20 @@ class GamesController < ApplicationController
   before_action :authorized_user!, only: [:edit, :update, :destroy]
 
   def index
-    @games = Game.all
     @rental = Rental.new
+    if params[:search].present?
+      @games = Game.all
+      params[:search].split(' ').each do |search|
+        @games = @games.where("name ILIKE ? OR description ILIKE ? OR address ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+      end
+    else
+      @games = Game.all
+    end
   end
 
   def my_games
     @my_games = current_user.games
+
   end
 
   def show
@@ -54,7 +62,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id)
+    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id, picture: [])
   end
   def authorized_user!
     unless @game.user == current_user
