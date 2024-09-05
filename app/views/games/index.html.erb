@@ -14,10 +14,10 @@
   <div class="filters-container mt-2">
     <div class="row">
       <div class="col">
-        <p>Filter 1: Localisation</p>
-      </div>
-      <div class="col">
-        <p>Filter 2: Choix du jeu</p>
+        <%= form_with url: games_path, method: :get, local: true, class: "d-flex col-12" do |form| %>
+          <%= form.text_field :search, class: "form-control mx-1", placeholder: "Jeu, description, adresse" %>
+          <%= form.submit "Chercher", class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
