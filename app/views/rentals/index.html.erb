@@ -5,7 +5,7 @@
       <h4><%= current_user.username %></h4>
     </div>
     <div class="rentals-container mt-4">
-      <% current_user.rentals.sort_by { |hsh| hsh[:status] }.each do |rental| %>
+      <% current_user.rentals.sort_by { |hsh| hsh[:statuses] }.reverse.each do |rental| %>
       <%= link_to rental_path(rental) do %>
         <div class="rental-card">
           <h3><%= rental.game.name %></h3>
@@ -20,8 +20,8 @@
           </p>
           <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
           <div class="rental-card-side-elements">
-            <p class="status <%= rental.status %>"><%= rental.status %></p>
-            <% if rental.status == "Confirmée" %>
+            <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
+            <% if rental.status == 1 %>
               <%= link_to "Annuler", cancel_rental_path(rental),
                   class: "btn btn-danger text-white",
                   data: {

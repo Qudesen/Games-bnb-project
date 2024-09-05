@@ -48,10 +48,10 @@
           <p class="p-1 ml-2" data-price-calculator-target="price"></p>
           <% if current_user == game.user %>
             <%= link_to "Modifier mon annonce", edit_game_path(game), class: "btn btn-warning text-white" %>
-            <%= link_to "Supprimer mon annonce", game_path(game), 
+            <%= link_to "Supprimer mon annonce", game_path(game),
                         data: {
                           turbo_method: :delete,
-                          turbo_confirm: 'Etes-vous sûr.e?'}, 
+                          turbo_confirm: 'Etes-vous sûr.e?'},
                         class: "btn btn-danger text-white"
             %>
           <% end %>

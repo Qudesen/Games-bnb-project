@@ -6,13 +6,13 @@
             as: :string,
             label: "Date de début",
             input_html: { data: { controller: "datepicker",
-                                  datepicker_target: "startDate" } } %>
+                                  price_calculator_target: "startDate" } } %>
 
       <%= f.input :end_date,
             as: :string,
             label: "Date de fin",
             input_html: { data: { controller: "datepicker",
-                                  datepicker_target: "endDate",
+                                  price_calculator_target: "endDate",
                                   action: "change->price-calculator#calculate" } } %>
 
       <%= f.submit 'Réserver le jeu', class: "btn btn-default btn-primary" %>

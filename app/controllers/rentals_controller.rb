@@ -4,14 +4,14 @@ class RentalsController < ApplicationController
   def index
     @rentals = current_user.rentals
     @rentals.each do |rental|
-      if rental.status == "Annulée"
+      if rental.status == 3
         break
       elsif rental.end_date < Date.current
-        rental.status = "Terminée"
+        rental.status = 2
       elsif (rental.end_date >= Date.current) && (rental.start_date <= Date.current)
-        rental.status = "En cours"
+        rental.status = 0
       else
-        rental.status = "Confirmée"
+        rental.status = 1
       end
       rental.save!
     end
@@ -57,7 +57,7 @@ class RentalsController < ApplicationController
 
   def cancel
     @rental = Rental.find(params[:id])
-    if @rental.update(status: "Annulée")
+    if @rental.update(status: 3)
       redirect_to rentals_path, notice: "La location a été annulée avec succès."
     else
       redirect_to rentals_path, alert: "Impossible d'annuler la location."
