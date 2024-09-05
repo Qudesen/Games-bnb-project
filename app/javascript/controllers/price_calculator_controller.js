@@ -14,6 +14,6 @@ export default class extends Controller {
     const startDate = new Date(start)
     const endDate = new Date(end)
     const result = ( endDate - startDate ) / (1000 * 60 * 60 * 24)
-    this.priceTarget.innerHTML = `Prix de votre location : <strong> ${ (this.priceValue * result).toFixed(2) } €</strong>`
+    this.priceTarget.innerHTML = `Prix de votre location : <strong> ${ this.priceValue * (1 + result).toFixed(2) } €</strong>`
+    }
   }
-}
