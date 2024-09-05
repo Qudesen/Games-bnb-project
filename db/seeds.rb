@@ -67,12 +67,13 @@ puts "Creating games"
 
 # Create 10 games
 10.times do
+  sleep(2)
   game = Game.new(
     name: ["Echec", "Monopoly", "Uno", "Poker", "Tarot", "Belote", "Scrabble", "Dixit", "Mille Bornes", "Pictionary"].sample,
     description: ["Voici une description du jeu, ce jeu est un jeu de société très amusant", "Voici une description du jeu, ce jeu est un jeu de société très amusant, Voici une description du jeu, ce jeu est un jeu de société très amusant."].sample,
     price_per_day: [1.2, 2.3, 3.5, 6.8].sample,
-    address: [" 1 rue de la République, Aix en provence", "2 bd longchamp, marseille", "10 av des Champs Elysées, Paris"].sample
-) 
+    address: ["1 rue de la République, Aix en provence", "2 boulevard longchamp, marseille", "10 avenue des Champs Elysées, Paris"].sample
+)
   game.user = User.all.sample
   game.save
 end
@@ -85,7 +86,7 @@ puts "Creating rentals"
     price: Faker::Number.decimal(l_digits: 2),
     start_date: Faker::Date.between(from: 2.days.ago, to: Date.today),
     end_date: Faker::Date.between(from: Date.today, to: 2.days.from_now),
-    status: ["pending", "accepted", "rejected"].sample,
+    status: ["confirmed", "canceled"].sample,
 )
   rental.user = User.all.sample
   rental.game = Game.all.sample

@@ -20,8 +20,10 @@ gem "devise"
 # Using Faker for seeds
 gem "faker"
 
+gem "geocoder", '~> 1.3', '>= 1.3.7'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem "importmap-rails", "~> 1.2.3"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
