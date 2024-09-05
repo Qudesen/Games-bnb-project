@@ -24,18 +24,25 @@
 
   <div class="games-container mt-4">
     <% @games.each do |game| %>
-      <div class="game-card" data-controller="show-games-details">
-        <div>
-          <h3><%= game.name%></h3>
-          <h6><i>publié par</i> <%= game.user.username%></h6>
-          <h6><%= game.address%></h6>
+      <div class="d-flex justify-content-between mb-4 p-3 bg-white shadow" data-controller="show-games-details">
+
+        <div class="d-flex gap-3">
+          <div>
+            <%= cl_image_tag("u1c6qobxmkw5e2i9lavt", width: 150, height: 150, crop: :fill) %>
+          </div>
+          <div>
+            <h3><%= game.name%></h3>
+            <h6><i>publié par</i> <%= game.user.username%></h6>
+            <h6><%= game.address%></h6>
+          </div>
         </div>
-        <div class="game-card-side-elements">
+
+        <div class="d-flex flex-column col-2 text-end">
           <h3><%= game.price_per_day %> € / j</h3>
-          <button class="btn btn-primary"
-          data-action="click->show-games-details#display"
-          >Voir +</button>
+          <button class="btn btn-primary" data-action="click->show-games-details#display">Voir +</button>
         </div>
+
+
 
         <div class="desc-and-rental-form d-none" data-show-games-details-target="description">
           <p><%= game.description %></p>
@@ -55,8 +62,8 @@
                         class: "btn btn-danger text-white"
             %>
           <% end %>
-
           </div>
+          
         </div>
       </div>
     <% end %>
