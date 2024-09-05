@@ -1,44 +1,59 @@
 <div class="container">
+
   <% if current_user %>
     <div class="head-container">
       <h1>Mes locations</h1>
       <h4><%= current_user.username %></h4>
     </div>
+
     <div class="rentals-container mt-4">
       <% current_user.rentals.sort_by { |hsh| hsh[:statuses] }.reverse.each do |rental| %>
-      <%= link_to rental_path(rental) do %>
+
         <div class="rental-card">
-          <h3><%= rental.game.name %></h3>
-          <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
-          <p>
-            <% if (rental.end_date - rental.start_date).to_i == 1 %>
-              1 jour,
-            <% else %>
-              <%= (rental.end_date - rental.start_date).to_i %> jours,
-            <% end %>
-             du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
-          </p>
-          <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
-          <div class="rental-card-side-elements">
+         <div class="row">
+<div class="col-9">
+<%= link_to rental_path(rental) do %>
+<div class="row">
+          <div class="col-3 rental-card-photo">
+            <p>Photo placeholder</p>
+          </div>
+
+          <div class="col-9 rental-card-main-info">
+            <h3><%= rental.game.name %></h3>
+            <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
+            <p>
+              <% if (rental.end_date - rental.start_date).to_i == 1 %>
+                1 jour,
+              <% else %>
+                <%= (rental.end_date - rental.start_date).to_i %> jours,
+              <% end %>
+              du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
+            </p>
+            <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
+          </div>
+</div>
+<% end %>
+</div>
+          <div class="col-3 rental-card-side-elements">
             <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
-            <% if rental.status == 1 %>
+            <% if rental.status == "confirmed" %>
               <%= link_to "Annuler", cancel_rental_path(rental),
                   class: "btn btn-danger text-white",
                   data: {
                     turbo_method: :patch,
-                    turbo_confirm: "Êtes-vous sûr.e ?"
-                  }
-              %>
+                    turbo_confirm: "Êtes-vous sûr.e ?" }%>
             <% end %>
           </div>
         </div>
-      <% end %>
-      <% end %>
+
+      </div>
+   <% end %>
+    </div>
+
     <% else %>
       <div class="head-container">
         <h4>Veuillez vous connecter pour accéder à vos locations</h4>
-        </div>
+      </div>
     <% end %>
-    <%= link_to "< Tous les jeux", games_path %>
-    </div>
+  <%= link_to "< Tous les jeux", games_path %>
 </div>
