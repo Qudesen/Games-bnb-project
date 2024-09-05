@@ -24,13 +24,13 @@
 
   <div class="games-container mt-4">
     <% @games.each do |game| %>
-      <div class="game-card" data-controller="show-games-details">
+      <div class="game-card shadow bg-white mb-3 p-3 rounded-4" data-controller="show-games-details">
         <div class="row">
           <div class="col-3 game-card-photo">
             <% if game.picture.key %>
-              <%= cl_image_tag(game.picture.key, class: "game-img")  %>
+              <%= cl_image_tag(game.picture.key, class: "game-img") %>
             <% else %>
-              <%= cl_image_tag("u1c6qobxmkw5e2i9lavt", class: "game-img", transformation: "square") %>
+              <%= cl_image_tag("hag4d9d9rrlqn9q54ujld77h0dlc", class: "game-img") %>
             <% end %>
           </div>
 
@@ -47,8 +47,8 @@
             >Voir +</button>
           </div>
         </div>
-        <div class="row">
-          <div class="desc-and-rental-form d-none" data-show-games-details-target="description">
+        <div class="row justify-content-center">
+          <div class="desc-and-rental-form d-none pt-3 col-6" data-show-games-details-target="description">
             <p><%= game.description %></p>
             <div class="dates-picker" data-controller="price-calculator"
             data-price-calculator-price-value=<%=game.price_per_day%>>
