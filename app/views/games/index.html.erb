@@ -27,7 +27,11 @@
       <div class="game-card" data-controller="show-games-details">
         <div class="row">
           <div class="col-3 game-card-photo">
-            <%= cl_image_tag("u1c6qobxmkw5e2i9lavt") %>
+            <% if game.picture.key %>
+              <%= cl_image_tag(game.picture.key, class: "game-img")  %>
+            <% else %>
+              <%= cl_image_tag("u1c6qobxmkw5e2i9lavt", class: "game-img", transformation: "square") %>
+            <% end %>
           </div>
 
           <div class="col-6 game-card-main-content">

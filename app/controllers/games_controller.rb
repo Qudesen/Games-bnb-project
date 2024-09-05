@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.all
     @rental = Rental.new
+
   end
 
   def show
@@ -50,7 +51,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id)
+    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id, :picture)
   end
   def authorized_user!
     unless @game.user == current_user

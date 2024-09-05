@@ -15,6 +15,7 @@
     <%= f.input :address,
                 placeholder: "1 rue de la liberté",
                 label: "Adresse" %>
+    <%= f.input :picture, as: :file %>
     <div class="text-center pt-3">
       <%= f.button :submit,"CREER LE JEU", class: "btn btn-primary " %>
       <%= link_to "ANNULER", games_path, class: "btn btn-danger text-white" %>
