@@ -8,6 +8,10 @@ class GamesController < ApplicationController
     @rental = Rental.new
   end
 
+  def my_games
+    @my_games = current_user.games
+  end
+
   def show
     @rental = Rental.new
   end
