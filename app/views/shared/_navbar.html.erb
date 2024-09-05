@@ -21,6 +21,7 @@
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Jeux à louer", games_path, class: "dropdown-item" %>
               <%= link_to "Mes locations", rentals_path, class: "dropdown-item" %>
+              <%= link_to 'Mes annonces de jeux', my_games_path(current_user), class: "dropdown-item" %>
               <%= link_to "Mon compte", "#", class: "dropdown-item" %>
               <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
