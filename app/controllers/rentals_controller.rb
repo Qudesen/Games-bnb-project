@@ -24,7 +24,8 @@ class RentalsController < ApplicationController
   def create
     @rental = Rental.new(rental_params)
     game = Game.find(params[:game_id])
-    @rental.price = (game.price_per_day * (@rental.end_date - @rental.start_date).to_i)
+    @rental.price = (game.price_per_day + (game.price_per_day * (@rental.end_date - @rental.start_date).to_i))
+    @rental.price == game.price_per_day if @rental.price == 0
     @rental.user = current_user
     @rental.game = game
     @rental.status = "Confirmée"
