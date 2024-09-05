@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :games
   resources :rentals, except: [:new]
   patch 'rentals/:id/cancel', to: 'rentals#cancel', as: :cancel_rental
+  get 'user/:id/my-games', to: 'games#my-games'
 
   # Defines the root path route ("/")
   # root "posts#index"

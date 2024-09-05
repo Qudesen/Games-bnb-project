@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show,]
   before_action :authorized_user!, only: [:edit, :update, :destroy]
+
   def index
     @games = Game.all
     @rental = Rental.new
