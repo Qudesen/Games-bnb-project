@@ -13,33 +13,46 @@
   </div>
 
 
-  <div class="games-container mt-4">
+ <div class="games-container mt-4">
     <% @my_games.each do |game| %>
-
-      <div class="game-card" data-controller="show-games-details">
+      <div class="game-card shadow mb-3 p-3 rounded-4" data-controller="show-games-details">
         <div class="row">
           <div class="col-3 game-card-photo">
-            <p>photo placeholder</p>
+            <% if game.picture.key %>
+              <%= cl_image_tag(game.picture.key, class: "game-img") %>
+            <% else %>
+              <%= image_tag "logo-tresjoueurs.png", class: "game-img" %>
+            <% end %>
           </div>
 
           <div class="col-6 game-card-main-content">
             <h3><%= game.name%></h3>
-            <h6><i>publié par</i> <%= game.user.username%></h6>
-            <h6><%= game.address%></h6>
+            <div>
+              <p><i>publié par</i> <%= game.user.username%></p>
+              <p><% if game.quarter && game.city %>
+              <%= game.quarter %>, <%= game.city %>
+              <% elsif game.quarter.nil? && game.city %>
+                <%= game.city %>
+              <% else %>
+                <%= game.address %>
+              <%end %></p>
+            </div>
           </div>
 
           <div class="col-3 game-card-side-elements">
-            <h3><%= game.price_per_day %> € / j</h3>
-            <button class="btn btn-primary"
+            <h3><%= game.price_per_day %> €</h3>
+            <p class="per-day">par jour</p>
+            <button class="btn btn-primary mt-2 p-2"
             data-action="click->show-games-details#display"
-            >Voir +</button>
+            data-show-games-details-target="voir">
+            Voir +</button>
           </div>
         </div>
 
-        <div class="row">
-          <div class="desc-and-rental-form d-none" data-show-games-details-target="description">
+        <div class="row justify-content-center">
+          <div class="desc-and-rental-form d-none pt-3" data-show-games-details-target="description">
             <p><%= game.description %></p>
-            <div class="dates-picker" data-controller="price-calculator"
+            <div class="dates-picker mt-3" data-controller="price-calculator"
             data-price-calculator-price-value=<%=game.price_per_day%>>
             <% if current_user != game.user %>
               <%= render "shared/rental_form", game: game %>
@@ -55,8 +68,12 @@
                             class: "btn btn-danger text-white"%>
             <% end %>
           </div>
+
         </div>
       </div>
+      <%= link_to new_game_path, class: "fixed-button" do %>
+      <i class="fa-solid fa-plus create-icon"></i>
+      <% end %>
     </div>
   <% end %>
 </div>
