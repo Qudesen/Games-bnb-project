@@ -46,7 +46,7 @@
           </div>
 
           <div class="col-3 game-card-side-elements">
-            <h3><%= game.price_per_day %> €</h3>
+            <h3><%= game.price_per_day >= 10 ? game.price_per_day.round(0) : game.price_per_day.round(1) %> €</h3>
             <p class="per-day">par jour</p>
             <button class="btn btn-primary mt-2 p-2"
             data-action="click->show-games-details#display"
