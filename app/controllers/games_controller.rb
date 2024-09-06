@@ -12,7 +12,7 @@ class GamesController < ApplicationController
         @games = @games.where("name ILIKE ? OR description ILIKE ? OR address ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
       end
     elsif params[:lat].present? && params[:lng].present?
-      @games = Game.near([params[:lat], params[:lng]], 1000)
+      @games = Game.near([params[:lat], params[:lng]], 100)
     end
   end
 
