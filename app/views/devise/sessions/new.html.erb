@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-6">
 
-      <h2>Log in</h2>
+      <h2>Connexion</h2>
 
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-inputs">
@@ -10,18 +10,17 @@
                       required: false,
                       autofocus: true,
                       input_html: { autocomplete: "email" } %>
-          <%= f.input :password,
+          <%= f.input :password, label: "Mot de passe",
                       required: false,
                       input_html: { autocomplete: "current-password" } %>
-          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+          <%= f.input :remember_me, label: "Se souvenir de mon email", as: :boolean if devise_mapping.rememberable? %>
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Log in" %>
+          <%= f.button :submit, "Se connecter", class: "btn btn-primary" %>
         </div>
       <% end %>
       <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
-

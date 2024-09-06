@@ -6,44 +6,45 @@
     </div>
     <div class="rentals-container mt-4">
       <% @rentals.each do |rental| %>
-        <div class="rental-card">
-          <div class="row">
-            <div class="col-9">
-              <%= link_to rental_path(rental) do %>
-                <div class="row">
-                  <div class="col-3 rental-card-photo">
-                    <% if rental.game.picture.key %>
-                      <%= cl_image_tag(rental.game.picture.key, class: "game-img") %>
-                    <% else %>
-                      <%= image_tag "logo-tresjoueurs.png", class: "game-img" %>
-                    <% end %>
-                  </div>
-                  <div class="col-9 rental-card-main-info">
-                    <h3><%= rental.game.name %></h3>
-                    <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
-                    <p>
-                      <% if (rental.end_date - rental.start_date).to_i == 1 %>
-                        1 jour,
-                      <% else %>
-                        <%= (rental.end_date - rental.start_date).to_i %> jours,
-                      <% end %>
-                      du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
-                    </p>
-                    <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
-                  </div>
-                </div>
+        <div class="rental-card shadow card-<%= rental.status %>">
+         <div class="row">
+          <div class="col-9">
+            <%= link_to rental_path(rental) do %>
+            <div class="row">
+          <div class="col-3 rental-card-photo">
+            <% if rental.game.picture.key %>
+              <%= cl_image_tag(rental.game.picture.key, class: "game-img") %>
+            <% else %>
+              <%= image_tag "logo-tresjoueurs.png", class: "game-img" %>
+            <% end %>
+          </div>
+
+          <div class="col-9 rental-card-main-info">
+            <h3><%= rental.game.name %></h3>
+            <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
+            <p>
+              <% if (rental.end_date - rental.start_date).to_i == 1 %>
+                1 jour,
+              <% else %>
+                <%= (rental.end_date - rental.start_date).to_i %> jours,
               <% end %>
-            </div>
-            <div class="col-3 rental-card-side-elements">
-              <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
-              <% if rental.confirmed? %>
-                <%= link_to "Annuler", cancel_rental_path(rental),
-                    class: "btn btn-danger text-white",
-                    data: {
-                      turbo_method: :patch,
-                      turbo_confirm: "Êtes-vous sûr.e ?" }%>
-              <% end %>
-            </div>
+              du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
+            </p>
+            <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
+
+          </div>
+</div>
+<% end %>
+</div>
+          <div class="col-3 rental-card-side-elements">
+            <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
+            <% if rental.confirmed? %>
+              <%= link_to "Annuler", cancel_rental_path(rental),
+                  class: "btn btn-sm btn-danger text-white",
+                  data: {
+                    turbo_method: :patch,
+                    turbo_confirm: "Êtes-vous sûr.e ?" }%>
+            <% end %>
           </div>
         </div>
       <% end %>
