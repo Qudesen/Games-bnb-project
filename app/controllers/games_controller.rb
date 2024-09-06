@@ -30,6 +30,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+
     @user = User.find(current_user.id)
     @game.user = @user
     if @game.save
@@ -62,7 +63,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id, picture: [])
+    params.require(:game).permit(:name, :description, :price_per_day, :address, :user_id, :picture)
   end
   def authorized_user!
     unless @game.user == current_user
