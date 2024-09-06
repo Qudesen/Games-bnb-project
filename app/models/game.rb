@@ -13,9 +13,9 @@ class Game < ApplicationRecord
   def add_city_to_model
     sleep(2)
     result = Geocoder.search(address)
-    if result
-      city = result.first.data["address"]["city"]
-      quarter = result.first.data["address"]["quarter"]
+    if result && result.first && result.first.data && result.first.data["address"]
+      city = result.first.data["address"]["city"] if result.first.data["address"]["city"]
+      quarter = result.first.data["address"]["quarter"] if result.first.data["address"]["quarter"]
       self.city = city if city
       self.quarter = quarter if quarter
     end
