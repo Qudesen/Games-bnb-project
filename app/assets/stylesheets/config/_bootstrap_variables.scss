@@ -7,12 +7,12 @@
 // General style
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
+$body-bg:                $dark;
 $font-size-base:         1rem;
 
 // Colors
 $body-color: $gray;
-$primary:    $blue;
+$primary:    $dark-orange;
 $success:    $green;
 $info:       $yellow;
 $danger:     $red;
@@ -26,3 +26,8 @@ $border-radius-xl:            .5rem;
 $border-radius-xxl:           1rem;
 
 // Override other variables below!
+$dropdown-link-color: $light-gray;
+$navbar-dark-color: $light-gray;
+$form-input-color: $light-gray;
+$input-color: $light-gray;
+$input-placeholder-color: #c5c8ce;

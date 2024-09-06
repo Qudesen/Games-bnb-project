@@ -10,7 +10,7 @@
       <% @rentals.each do |rental| %>
 
 
-        <div class="rental-card">
+        <div class="rental-card shadow card-<%= rental.status %>">
          <div class="row">
           <div class="col-9">
             <%= link_to rental_path(rental) do %>
@@ -40,7 +40,7 @@
             <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
             <% if rental.confirmed? %>
               <%= link_to "Annuler", cancel_rental_path(rental),
-                  class: "btn btn-danger text-white",
+                  class: "btn btn-sm btn-danger text-white",
                   data: {
                     turbo_method: :patch,
                     turbo_confirm: "Êtes-vous sûr.e ?" }%>
