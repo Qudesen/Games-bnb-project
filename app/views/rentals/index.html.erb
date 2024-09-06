@@ -1,24 +1,23 @@
 <div class="container">
-
   <% if current_user %>
     <div class="head-container">
       <h1>Mes locations</h1>
       <h4><%= current_user.username %></h4>
     </div>
-
     <div class="rentals-container mt-4">
       <% @rentals.each do |rental| %>
-
-
         <div class="rental-card shadow card-<%= rental.status %>">
          <div class="row">
           <div class="col-9">
             <%= link_to rental_path(rental) do %>
             <div class="row">
-          <div class="col-3 rental-card-photo">
-            <%= cl_image_tag("u1c6qobxmkw5e2i9lavt") %>
-          </div>
-
+              <div class="col-3 rental-card-photo">
+                <% if rental.game.picture.key %>
+                  <%= cl_image_tag(rental.game.picture.key, class: "game-img") %>
+                <% else %>
+                  <%= image_tag "logo-tresjoueurs.png", class: "game-img" %>
+                <% end %>
+              </div>
           <div class="col-9 rental-card-main-info">
             <h3><%= rental.game.name %></h3>
             <h6><i>Propriétaire </i>: <%= rental.game.user.username %></p>
@@ -31,11 +30,10 @@
               du <%= rental.start_date.strftime("%d %b %Y") %> au <%= rental.end_date.strftime("%d %b %Y") %>
             </p>
             <p>Prix TTC : <strong><%= "%.2f" % rental.price %> €</strong></p>
-
           </div>
-</div>
-<% end %>
-</div>
+        </div>
+        <% end %>
+        </div>
           <div class="col-3 rental-card-side-elements">
             <p class="status <%= rental.status %>"><%= Rental::STATUSES[rental.status.to_sym] %></p>
             <% if rental.confirmed? %>
@@ -47,9 +45,8 @@
             <% end %>
           </div>
         </div>
-
-      </div>
-   <% end %>
+        </div>
+      <% end %>
     </div>
     <% else %>
       <div class="head-container">

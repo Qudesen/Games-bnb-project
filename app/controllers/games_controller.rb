@@ -5,13 +5,14 @@ class GamesController < ApplicationController
 
   def index
     @rental = Rental.new
+    @games = Game.all
+    @user = current_user
     if params[:search].present?
-      @games = Game.all
       params[:search].split(' ').each do |search|
         @games = @games.where("name ILIKE ? OR description ILIKE ? OR address ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
       end
-    else
-      @games = Game.all
+    elsif params[:lat].present? && params[:lng].present?
+      @games = Game.near([params[:lat], params[:lng]], 1000)
     end
   end
 

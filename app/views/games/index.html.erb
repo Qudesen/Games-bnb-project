@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-controller="location">
 
   <div class="head-container">
     <div class="row">
@@ -18,7 +18,9 @@
       </div>
     </div>
   </div>
-
+    <div class="col- text-center mt-3">
+      <button class="btn btn-primary" data-action="click->location#findNear">Geolocalise moi</button>
+    </div>
   <div class="games-container mt-4">
     <% @games.each do |game| %>
       <div class="game-card shadow mb-3 p-3 rounded-4" data-controller="show-games-details">
@@ -44,9 +46,10 @@
               <%end %></p>
             </div>
           </div>
-
           <div class="col-3 game-card-side-elements">
+            <% if game.price_per_day %>
             <h3><%= game.price_per_day >= 10 ? game.price_per_day.round(0) : game.price_per_day.round(1) %> €</h3>
+            <% end %>
             <p class="per-day">par jour</p>
             <button class="btn btn-primary mt-2 p-2"
             data-action="click->show-games-details#display"
