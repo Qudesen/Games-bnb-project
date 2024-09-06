@@ -50,7 +50,8 @@
             <h3><%= game.price_per_day %> € / j</h3>
             <button class="btn btn-primary"
             data-action="click->show-games-details#display"
-            >Voir +</button>
+            data-show-games-details-target="voir">
+            Voir +</button>
           </div>
         </div>
         <div class="row justify-content-center">
@@ -72,7 +73,7 @@
                             class: "btn btn-danger text-white"%>
             <% end %>
           </div>
-          
+
         </div>
       </div>
     </div>
